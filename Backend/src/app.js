@@ -20,7 +20,8 @@ app.use(express.urlencoded({ limit: "40kb", extended: "true" }));
 app.use("/api/v1/users", useRoutes);
 
 const start = async () => {
-    const connectionDb = await mongoose.connect("mongodb+srv://arpit17351722_db_user:Ayush6691@videoconfern.qggydre.mongodb.net/")
+    const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/video_conf";
+    const connectionDb = await mongoose.connect(mongoURI);
     console.log(`MONGO Connected DB HOst: ${connectionDb.connection.host}`)
     server.listen(app.get("port"), () => {
         console.log("LISTEN ON PORT 8000")
